@@ -68,9 +68,9 @@ end
 
 function FrostHubLib:IsRunning()
 	if gethui then
-		return FrostHub.Parent == gethui()
+		return FrostHubLib.Parent == gethui()
 	else
-		return FrostHub.Parent == game:GetService("CoreGui")
+		return FrostHubLib.Parent == game:GetService("CoreGui")
 	end
 
 end
