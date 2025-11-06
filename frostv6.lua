@@ -26,23 +26,23 @@ local VanithLib = {
 }
 
 --Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
-local Icons = {}
+--local Icons = {}
 
-local Success, Response = pcall(function()
-	Icons = HttpService:JSONDecode(game:HttpGetAsync("https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json")).icons
-end)
+--local Success, Response = pcall(function()
+	--Icons = HttpService:JSONDecode(game:HttpGetAsync("https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json")).icons
+--end)
 
-if not Success then
-	warn("\nFrostHub V6 Library - Failed to load Feather Icons. Error code: " .. Response .. "\n")
-end	
+--if not Success then
+	--warn("\nFrostHub V6 Library - Failed to load Feather Icons. Error code: " .. Response .. "\n")
+--end	
 
-local function GetIcon(IconName)
-	if Icons[IconName] ~= nil then
-		return Icons[IconName]
-	else
-		return nil
-	end
-end   
+--local function GetIcon(IconName)
+	--if Icons[IconName] ~= nil then
+		--return Icons[IconName]
+	--else
+		--return nil
+	--end
+--end   
 --------------------------------------------------------------------
 local FrostHub = Instance.new("ScreenGui")
 FrostHub.Name = "FrostHub"
