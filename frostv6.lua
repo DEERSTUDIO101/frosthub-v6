@@ -1,5 +1,3 @@
-local FrostHub = {}
----------------------------------------------------------------------------
 local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
 local RunService = game:GetService("RunService")
