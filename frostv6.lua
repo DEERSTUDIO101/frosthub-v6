@@ -1,16 +1,15 @@
-local tween = game:GetService("TweenService")
-local tweeninfo = TweenInfo.new
-local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local HttpService = game:GetService('HttpService')
+local RunService = game:GetService('RunService')
 local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Lighting = game:GetService("Lighting")
 local Workspace = game:GetService("Workspace")
 local CoreGui = game:GetService("CoreGui")
-local HttpService = getService('HttpService')
-local RunService = getService('RunService')
-local Players = getService("Players")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
+
+-- Dann erst:
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 ---------------------------------------------------------------------------
 local Utility = {}
