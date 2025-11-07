@@ -9,6 +9,9 @@ local CoreGui = game:GetService("CoreGui")
 local HttpService = getService('HttpService')
 local RunService = getService('RunService')
 local Players = getService("Players")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 ---------------------------------------------------------------------------
 local Utility = {}
 local Objects = {}
