@@ -259,9 +259,6 @@ local dragOffsetMobile = 150
 FrostHub.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 
-local Icons = useStudio and require(script.Parent.icons) or loadWithTimeout('https://raw.githubusercontent.com/SiriusSoftwareLtd/FrostHub/refs/heads/main/icons.lua')
--- Variables
-
 local CFileName = nil
 local CEnabled = false
 local Minimised = false
