@@ -15,6 +15,108 @@ local CoreGui = game:GetService("CoreGui")
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 ---------------------------------------------------------------------------
 local Utility = {}
+-- Fehlende Funktionen für FrostHub hinzufügen
+-- Füge diese NACH den Service-Definitionen und VOR "local Utility = {}" ein
+
+-- getService Wrapper
+local function getService(serviceName)
+    return game:GetService(serviceName)
+end
+
+-- loadWithTimeout Funktion (für das Laden von Icons)
+local function loadWithTimeout(url, timeout)
+    timeout = timeout or 5
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(url, true))()
+    end)
+    
+    if success then
+        return result
+    else
+        warn("FrostHub | Failed to load: " .. url)
+        return nil
+    end
+end
+
+-- sendReport Funktion (für Analytics - optional)
+local function sendReport(eventType, eventData)
+    -- Optional: Analytics deaktivieren oder eigene Implementierung
+    -- Aktuell nur ein Platzhalter
+    return true
+end
+
+-- requestFunc für Discord-Integration
+local requestFunc = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+
+-- requestsDisabled Flag
+local requestsDisabled = not requestFunc
+
+-- useStudio Flag (für Roblox Studio Testing)
+local useStudio = false
+
+-- debugX Flag (für Debug-Ausgaben)
+local debugX = false
+
+-- Settings System
+local settingsTable = {
+    ["General"] = {
+        ["FrostHubOpen"] = {
+            Name = "Open/Close Keybind",
+            Type = "bind",
+            Value = "LeftControl",
+            Placeholder = "Keybind"
+        }
+    }
+}
+
+local settingsCreated = false
+local settingsInitialized = false
+local cachedSettings = {}
+local overriddenSettings = {}
+
+-- Helper Functions für Settings
+local function getSetting(category, setting)
+    if overriddenSettings[category .. "." .. setting] then
+        return overriddenSettings[category .. "." .. setting]
+    end
+    
+    if settingsTable[category] and settingsTable[category][setting] then
+        return settingsTable[category][setting].Value
+    end
+    return nil
+end
+
+local function overrideSetting(category, setting, value)
+    overriddenSettings[category .. "." .. setting] = value
+end
+
+-- SaveConfiguration Funktion
+function SaveConfiguration(data)
+    if not CEnabled then return end
+    
+    local flags = {}
+    for flagName, flag in pairs(FrostHubLibrary.Flags or {}) do
+        if flag.Type == "ColorPicker" then
+            flags[flagName] = PackColor(flag.Color)
+        elseif flag.CurrentValue ~= nil then
+            flags[flagName] = flag.CurrentValue
+        elseif flag.CurrentKeybind ~= nil then
+            flags[flagName] = flag.CurrentKeybind
+        elseif flag.CurrentOption ~= nil then
+            flags[flagName] = flag.CurrentOption
+        elseif flag.Color ~= nil then
+            flags[flagName] = PackColor(flag.Color)
+        end
+    end
+    
+    local success, encoded = pcall(function()
+        return HttpService:JSONEncode(flags)
+    end)
+    
+    if success and writefile then
+        writefile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension, encoded)
+    end
+end
 local Objects = {}
 function FrostHub:DraggingEnabled(frame, parent)
 
